@@ -2,9 +2,12 @@
 
 //all the buttons in the html saved in the saveBtn variable
 var saveBtn = $(".saveBtn");
-$("#currentDay").text(dayjs().toDate());
 
-// each time block is color-coded to indicate whether it is in the past, present, or future
+// Current time display in th header
+var today = dayjs();
+$('#currentDay').text(today.format('dddd, MMMM D YYYY, h:mm a'));
+
+// each time block will be color-coded depending if it's in the past, present, or future
 function timeBlocks() {
     var hour = dayjs().hour();
 
@@ -12,7 +15,6 @@ function timeBlocks() {
         var currHour = parseInt($(this).attr("id"));
 
         // console.log(this); //each time-block
-
         if (currHour > hour) {
             $(this).addClass("future");
         } else if (currHour === hour) {
@@ -40,8 +42,6 @@ function usePlanner() {
         var currHour = $(this).text();
         var currtextInput = localStorage.getItem(currHour);
 
-        // console.log(this);
-        // console.log(currHour);
 
         if(currtextInput !== null) {
             $(this).siblings(".description").val(currtextInput);
